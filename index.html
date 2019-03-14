@@ -1,50 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      #maDiv {
-        background-color: red;
-        color: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 1px 1px 1px 1px black;
-        transform: scale(1);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      #maDiv:hover {       
-        transform: scale(1.5);
-        transition: 0.3s;
-      }
-    </style>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="externallibs/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h1>Hello World!</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js
+    <!-- We are using Node.js
     <script>
-      document.write(process.versions.node);</script
-    >, Chromium
+      document.write(process.versions.node);</script>, Chromium
     <script>
-      document.write(process.versions.chrome);</script
-    >, and Electron
+      document.write(process.versions.chrome);</script>, and Electron
     <script>
-      document.write(process.versions.electron);</script
-    >.
+      document.write(process.versions.electron);</script>. -->
 
-    <script>
-      // You can also require other files to run in this process
-      require("./renderer.js");
+    <script>    
+      
+       var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        document.getElementById("mainDiv").innerHTML = this.response;
+        require("./src/pages/home/home.js");
+      };
+      xhr.open("GET", "./src/pages/home/home.html", true);
+      xhr.send();
     </script>
 
-    <div
-      id="maDiv"
-      onclick="alert('YOYOYYO')"
-      style="background-color:red;color:white"
-    >
-      I am Nabil
-    </div>
+    <div id="mainDiv"></div>
   </body>
 </html>
