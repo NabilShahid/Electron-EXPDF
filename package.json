@@ -1,10 +1,11 @@
 {
-  "name": "electron-quick-start",
+  "name": "EXPDF",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build":"electron-packager . --asar --platform=win32 --overwrite --icon=assets/expdf.ico"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,7 +18,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^4.0.7"
+    "electron": "^4.0.7",
+    "electron-packager": "^13.1.1"
   },
   "dependencies": {
     "electron-reload": "^1.4.0",

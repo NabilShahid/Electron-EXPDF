@@ -1,0 +1,67 @@
+<div id="headerDiv">
+  FID General Trading FZC - Invoice Generator
+</div>
+<div id="mainFormDiv">
+  <div class="formSepDiv">File Info</div>
+  <div class="row formRow">
+    <div class="col-md-3">
+      <label class="mainLabel">Source Excel File</label>
+    </div>
+    <div class="col-md-9">
+      <input class="formControl" id="excelInput" type="file"  />
+    </div>
+  </div>
+
+  <div class="row formRow">
+    <div class="col-md-3">
+      <label class="mainLabel">Destination Folder</label>
+    </div>
+    <div class="col-md-9">
+      <input class="formControl" type="file" id="destinationPath" webkitdirectory />
+    </div>
+  </div>
+  <div class="formSepDiv">Shipper Info</div>
+  <div class="row formRow">
+    <div class="col-md-3">
+      <label class="mainLabel">Name</label>
+    </div>
+    <div class="col-md-9">
+      <input class="formControl" type="text" id="shipperName" />
+    </div>
+  </div>
+
+  <div class="row formRow">
+    <div class="col-md-3">
+      <label class="mainLabel">Address</label>
+    </div>
+    <div class="col-md-9">
+      <input class="formControl" type="text" id="shipperAddress" />
+    </div>
+  </div>
+  <div class="row formRow">
+    <div class="col-md-3">
+      <label class="mainLabel">Contact #</label>
+    </div>
+    <div class="col-md-9">
+      <input class="formControl" type="text" id="shipperContact" />
+    </div>
+  </div>
+  <div class="formSepDiv">Other Info</div>
+  <div class="row formRow">
+    <div class="col-md-3">
+      <label class="mainLabel">Date</label>
+    </div>
+    <div class="col-md-9">
+      <input class="formControl" type="text" id="invoiceDate" />
+    </div>
+  </div>
+  <div class="row formRow">
+      <div class="col-md-8">
+
+      </div>
+      <div class="col-md-4"  style="text-align:right">
+            <button id="generateButton">Generate</button>
+            
+      </div>
+  </div>
+</div>
