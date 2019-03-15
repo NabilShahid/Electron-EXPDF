@@ -4,64 +4,83 @@
 <div id="mainFormDiv">
   <div class="formSepDiv">File Info</div>
   <div class="row formRow">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="mainLabel">Source Excel File</label>
     </div>
-    <div class="col-md-9">
-      <input class="formControl" id="excelInput" type="file"  />
+    <div class="col-md-8">
+      <input class="formControl" id="excelInput" type="file" />
     </div>
   </div>
 
   <div class="row formRow">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="mainLabel">Destination Folder</label>
     </div>
-    <div class="col-md-9">
-      <input class="formControl" type="file" id="destinationPath" webkitdirectory />
+    <div class="col-md-8">
+      <input
+        class="formControl"
+        type="file"
+        id="destinationPath"
+        webkitdirectory
+      />
     </div>
   </div>
+  <div class="row formRow">
+        <div class="col-md-4">
+          <label class="mainLabel">Destination File Name</label>
+        </div>
+        <div class="col-md-8">
+          <input class="formControl" type="text" id="fileName" />
+        </div>
+      </div>
   <div class="formSepDiv">Shipper Info</div>
   <div class="row formRow">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="mainLabel">Name</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       <input class="formControl" type="text" id="shipperName" />
     </div>
   </div>
 
   <div class="row formRow">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="mainLabel">Address</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       <input class="formControl" type="text" id="shipperAddress" />
     </div>
   </div>
   <div class="row formRow">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="mainLabel">Contact #</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       <input class="formControl" type="text" id="shipperContact" />
     </div>
   </div>
   <div class="formSepDiv">Other Info</div>
   <div class="row formRow">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label class="mainLabel">Date</label>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       <input class="formControl" type="text" id="invoiceDate" />
     </div>
   </div>
-  <div class="row formRow">
-      <div class="col-md-8">
-
-      </div>
-      <div class="col-md-4"  style="text-align:right">
-            <button id="generateButton">Generate</button>
-            
-      </div>
+  <div class="row formRow" style="margin-top:20px;"> 
+    <div class="col-md-8"></div>
+    <div class="col-md-4" style="text-align:right">
+        
+      <button id="generateButton" style="transition:0.7s">
+        
+            <table>
+                    <tr>
+                        <td><div id="generateLoader" style="display:none;" class="loader"></div></td>
+                        <td>Generate</td>
+                    </tr>
+                </table>
+      </button>
+    </div>
   </div>
 </div>
