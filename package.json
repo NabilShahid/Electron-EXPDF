@@ -5,7 +5,12 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build":"electron-packager . --asar --platform=win32 --overwrite --icon=assets/expdf.ico"
+    "build": "electron-packager . --platform=win32 --overwrite --icon=assets/expdf.ico",
+    "pack":"build --dir"
+  },
+  "build":{
+    "appId":"as.asd.fas.d",
+    "productName":"dadsasdf"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -19,7 +24,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-packager": "^13.1.1"
+    "electron-packager": "^13.1.1",
+    "electron-winstaller": "^3.0.4"
   },
   "dependencies": {
     "electron-reload": "^1.4.0",

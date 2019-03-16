@@ -3,22 +3,21 @@ const readXlsxFile = require("read-excel-file");
 const input = document.getElementById("input");
 const fs = require("fs");
 const pdf = require("html-pdf");
-
 //<------------------------------------------Global Variables--------------------------------------->
 let options = { format: "Letter" };
-let destinationPath = ".";
+let destinationPath = "";
 let allExcelRows = [];
 let colIndexMapping = {};
 const nameLabels = {
-  Name: "NAME",
-  Address: "ADDRESS",
-  City: "CITY",
-  InvoiceNumber: "INVOICE NO",
-  Content: "CONTENT",
-  Quantity: "QTY",
-  SpecialIntructions: "SPECIAL INSTRUCTION",
-  Mobile1: "MOBILE 1",
-  COD: "COD"
+  Name: "name",
+  Address: "address",
+  City: "city",
+  InvoiceNumber: "invoice no",
+  Content: "content",
+  Quantity: "qty",
+  SpecialIntruction: "special instruction",
+  Mobile1: "mobile 1",
+  COD: "cod"
 };
 
 //<------------------------------------------Event linsters--------------------------------------->
@@ -39,9 +38,8 @@ document.getElementById("excelInput").addEventListener("change", () => {
     } catch (ex) {
       alert("Error occured while reading excel file.\nError: " + ex.message);
     }
-
-     
-  });
+  });});
+  
 
   /**
    * Destination folder change event listener
@@ -54,44 +52,75 @@ document.getElementById("excelInput").addEventListener("change", () => {
    * Generate pdf button event listener
    */
   document.getElementById("generateButton").addEventListener("click", () => {
-    document.getElementById("generateLoader").style.display = "block";
-    setTimeout(() => {
-      try {
-        pdf
-          .create(generateAllInvoices(allExcelRows), options)
-          .toFile(
-            document.getElementById("destinationPath").files[0].path +
-              "/" +
-              document.getElementById("fileName").value +
-              ".pdf",
-            function(err, res) {
-              if (err) return console.log(err);
-              console.log(res);
-              document.getElementsByClassName("loader")[0].style.display =
-                "none";
-                alert("Pdf generated successfully. Please check the desnitation folder.")
-            }
-          );
-      } catch (ex) {
-        alert("Error occured while generating pdf.\nError: " + ex.message);
-      }
-    }, `500`);
+    const error = validateInputs();
+    if (error) {
+      alert(error);
+    } else {
+      document.getElementById("generateLoader").style.display = "block";
+      setTimeout(() => {
+        try {
+          pdf
+            .create(generateAllInvoices(allExcelRows), options)
+            .toFile(
+              destinationPath +
+                "/" +
+                document.getElementById("fileName").value +
+                ".pdf",
+              function(err, res) {
+                if (err) return console.log(err);
+                console.log(res);
+                alert(
+                  "Pdf generated successfully. Please check the desnitation folder."
+                );
+                document.getElementsByClassName("loader")[0].style.display =
+                  "none";
+              }
+            );
+        } catch (ex) {
+          alert("Error occured while generating pdf.\nError: " + ex.message);
+        }
+      }, `500`);
+    }
   });
 
   //<------------------------------------------Gloabal Functions--------------------------------------->
 
   /**
-   * validateAllInputs
+   * validate All Inputs
    */
   function validateInputs() {
-    if (
-      !document.getElementById("shipperName") ||
-      !document.getElementById("shipperAddress") ||
-      !document.getElementById("shipperContact") ||
-      !document.getElementById("invoiceDate")
-    )
-      return false;
-    return true;
+    let error = "";
+    error = document.getElementById("shipperName").value
+      ? false
+      : "Please provide shipper name";
+    if (error) return error;
+
+    error = document.getElementById("shipperAddress").value
+      ? false
+      : "Please provide shipper address";
+    if (error) return error;
+
+    error = document.getElementById("shipperContact").value
+      ? false
+      : "Please provide shipper contact";
+    if (error) return error;
+
+    error = document.getElementById("invoiceDate").value
+      ? false
+      : "Please provide date";
+    if (error) return error;
+
+    error = document.getElementById("fileName").value
+      ? false
+      : "Please provide file name";
+    if (error) return error;
+
+    error = allExcelRows.length>0 ? false : "Excel file not selected or no records in file";
+    if (error) return error;
+
+    error = destinationPath ? false : "Please select destination path";
+    if (error) return error;
+
   }
 
   /**
@@ -145,7 +174,9 @@ document.getElementById("excelInput").addEventListener("change", () => {
                     TRN No: 100460738600003
                 </td>
                 <td style="width:30%;text-align:right;font-weight:normal;">
-                    Invoice No: ${row[colIndexMapping[nameLabels["InvoiceNumber"]]]}
+                    Invoice No: ${
+                      row[colIndexMapping[nameLabels["InvoiceNumber"]]]
+                    }
                 </td>
             </tr>
         </table>
@@ -194,7 +225,13 @@ document.getElementById("excelInput").addEventListener("change", () => {
                                 Special Instructions:
                             </td>
                             <td style="width:50%;">
-                            ${row[colIndexMapping[nameLabels["SpecialIntructions"]]]}
+                            ${
+                              row[
+                                colIndexMapping[
+                                  nameLabels["SpecialIntruction"]
+                                ]
+                              ]
+                            }
                             </td>
                         </tr>
                     </table>
@@ -233,8 +270,8 @@ document.getElementById("excelInput").addEventListener("change", () => {
   function getColumnsIndexMapping(firstRow) {
     let mapping = {};
     firstRow.forEach((v, i) => {
-      mapping[v] = i;
+      mapping[v.toLowerCase()] = i;
     });
     return mapping;
   }
-});
+
